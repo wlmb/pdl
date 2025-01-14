@@ -1,4 +1,4 @@
-- add upper_srt to take square roots guarranteed to lie in the upper complex half plane
+- add sqrt_upper to take square roots guarranteed to lie in the upper complex half plane
 - fix test that assumed acosh(0)->byte, i.e. nan()->byte, was always 0 (#514) - thanks @eserte for report
 - separate PDL::Type POD documentation
 - partly restoring pre-2.096 xform type-selection: if xform given no typed outputs, and non-available (greater than last-given type) typed inputs, use last-given (#511, https://github.com/moocow-the-bovine/PDL-CCS/issues/18)
