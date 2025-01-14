@@ -111,6 +111,19 @@ if ($can_complex_power) {
 is $pa->at(0), '16', 'sqrt orig value ok';
 }
 
+{   # upper_sqrt
+    my $pi=4*atan2(1,1);
+    my $eiO = exp(i()*sequence(10)*$pi/4);
+    my $sqrt=upper_sqrt($eiO);
+    ok(approx($sqrt**2, $eiO)->all, "Square of upper_sqrt of complex");
+    ok(($sqrt->im >= 0)->all, "Im upper_sqrt");
+    my $neg=sequence(10)-5;
+    my $negsqrt=$neg->upper_sqrt;
+    ok(approx($negsqrt**2,$neg)->all, "Square of upper_sqrt of real");
+    ok(($negsqrt->im >= 0)->all, "Im upper_sqrt of real");
+}
+
+
 {
 my $pa = pdl 1,0;
 my $pb = ! $pa;
