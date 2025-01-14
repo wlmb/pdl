@@ -423,7 +423,7 @@ EOF
 );
 
 pp_def('sqrt_upper',
-    GenericTypes => [reverse qw(G C)],
+    GenericTypes => [reverse qw(G C H)],
     Pars => 'i(); complex [o] o()',
     Doc => <<'EOF',
 Take the complex square root of a number choosing that whose imaginary
@@ -431,7 +431,7 @@ part is not negative, i.e., it is a square root with a branch cut
 'infinitesimally' below the positive real axis.
 EOF
     Code => q{
-        $GENERIC() tmp=csqrt($i());
+        $GENERIC() tmp=sqrt($i());
         if(cimag(tmp)<0){
              tmp = -tmp;
         }

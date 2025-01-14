@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 use PDL::LiteF;
+use Test::PDL;
 use Config;
 kill 'INT',$$ if $ENV{UNDER_DEBUGGER}; # Useful for debugging.
 use Test::Exception;
@@ -115,12 +116,30 @@ is $pa->at(0), '16', 'sqrt orig value ok';
     my $pi=4*atan2(1,1);
     my $eiO = exp(i()*sequence(10)*$pi/4);
     my $sqrt=sqrt_upper($eiO);
-    ok(approx($sqrt**2, $eiO)->all, "Square of sqrt_upper of complex");
+    is_pdl($sqrt**2, $eiO, "Square of sqrt_upper of complex");
     ok(($sqrt->im >= 0)->all, "Im sqrt_upper");
-    my $neg=sequence(10)-5;
-    my $negsqrt=$neg->sqrt_upper;
-    ok(approx($negsqrt**2,$neg)->all, "Square of sqrt_upper of real");
-    ok(($negsqrt->im >= 0)->all, "Im sqrt_upper of real");
+    my $lneg=sequence(long,10)-5;
+    my $lnegsqrt=$lneg->sqrt_upper;
+    is_pdl($lnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of long");
+    ok(($lnegsqrt->im >= 0)->all, "Im sqrt_upper of long");
+    my $llnegsqrt=$lneg->longlong->sqrt_upper;
+    is_pdl($llnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of longlong");
+    ok(($llnegsqrt->im >= 0)->all, "Im sqrt_upper of longlong");
+    my $fnegsqrt=$lneg->float->sqrt_upper;
+    is_pdl($fnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of float");
+    ok(($fnegsqrt->im >= 0)->all, "Im sqrt_upper of float");
+    my $fnegsqrt=$lneg->float->sqrt_upper;
+    is_pdl($fnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of float");
+    ok(($fnegsqrt->im >= 0)->all, "Im sqrt_upper of float");
+    my $cfnegsqrt=$lneg->cfloat->sqrt_upper;
+    is_pdl($cfnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of cfloat");
+    ok(($cfnegsqrt->im >= 0)->all, "Im sqrt_upper of cfloat");
+    my $cdnegsqrt=$lneg->cdouble->sqrt_upper;
+    is_pdl($cdnegsqrt**2,cdouble($lneg), "Square of sqrt_upper of cdouble");
+    ok(($cdnegsqrt->im >= 0)->all, "Im sqrt_upper of cdouble");
+    my $cldnegsqrt=$lneg->cldouble->sqrt_upper;
+    is_pdl($cldnegsqrt**2,cldouble($lneg), "Square of sqrt_upper of cldouble");
+    ok(($cldnegsqrt->im >= 0)->all, "Im sqrt_upper of cldouble");
 }
 
 
