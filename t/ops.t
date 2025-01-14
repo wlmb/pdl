@@ -128,9 +128,12 @@ is $pa->at(0), '16', 'sqrt orig value ok';
     my $fnegsqrt=$lneg->float->sqrt_upper;
     is_pdl($fnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of float");
     ok(($fnegsqrt->im >= 0)->all, "Im sqrt_upper of float");
-    my $fnegsqrt=$lneg->float->sqrt_upper;
-    is_pdl($fnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of float");
-    ok(($fnegsqrt->im >= 0)->all, "Im sqrt_upper of float");
+    my $dnegsqrt=$lneg->double->sqrt_upper;
+    is_pdl($dnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of double"); # **??** cdouble?
+    ok(($dnegsqrt->im >= 0)->all, "Im sqrt_upper of double");
+    my $ldnegsqrt=$lneg->ldouble->sqrt_upper;
+    is_pdl($ldnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of ldouble"); # **??** cldouble?
+    ok(($dnegsqrt->im >= 0)->all, "Im sqrt_upper of double");
     my $cfnegsqrt=$lneg->cfloat->sqrt_upper;
     is_pdl($cfnegsqrt**2,cfloat($lneg), "Square of sqrt_upper of cfloat");
     ok(($cfnegsqrt->im >= 0)->all, "Im sqrt_upper of cfloat");
