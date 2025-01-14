@@ -423,7 +423,7 @@ EOF
 );
 
 pp_def('sqrt_upper',
-    GenericTypes => [reverse qw(G C H)],
+    GenericTypes => [reverse @$C],
     Pars => 'i(); complex [o] o()',
     Doc => <<'EOF',
 Take the complex square root of a number choosing that whose imaginary
